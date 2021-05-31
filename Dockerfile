@@ -1,8 +1,7 @@
-FROM python:3.7
+FROM python:3.7-alpine3.13 as builder
 
-RUN apt-get update -y \
-    && apt-get upgrade -y \
-    && mkdir -p /usr/src/aardvark \
+RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev build-base
+RUN mkdir -p /usr/src/aardvark \
     && pip install --upgrade wheel setuptools pip
 
 WORKDIR /usr/src/aardvark
@@ -10,6 +9,9 @@ WORKDIR /usr/src/aardvark
 COPY . /usr/src/aardvark
 RUN pip install .
 
+FROM python:3.7-alpine3.13
+
+COPY --from=builder /usr/src/aardvark /usr/src/aardvark
 WORKDIR /etc/aardvark
 
 ENV AARDVARK_DATA_DIR=/data \

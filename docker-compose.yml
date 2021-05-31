@@ -7,6 +7,10 @@ services:
     image: netflixoss/aardvark:latest
     volumes:
       - data:/data
+    depends_on:
+      - pg
+    links:
+      - pg
     env_file: .env
     command: [ "aardvark", "create_db" ]
 
@@ -15,6 +19,9 @@ services:
     image: netflixoss/aardvark:latest
     depends_on:
       - init
+      - pg
+    links:
+      - pg
     ports:
       - 5000:5000
     volumes:
@@ -27,11 +34,25 @@ services:
     image: netflixoss/aardvark:latest
     depends_on:
       - init
+      - pg
+    links:
+      - pg
     restart: always
     volumes:
       - data:/data
     env_file: .env
     command: [ "aardvark", "update", "-a", "$AARDVARK_ACCOUNTS" ]
+
+  pg:
+    image: postgres:11
+    restart: unless-stopped
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: aardvark
+      POSTGRES_PASSWORD: aardvark
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
 
 volumes:
   data:
