@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -ex
 
 # set the default values of environment variables
@@ -6,6 +6,7 @@ AARDVARK_ROLE="${AARDVARK_ROLE:-Aardvark}"
 AARDVARK_DATA_DIR="${AARDVARK_DATA_DIR:-/data}"
 AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-us-east-1}"
 AWS_ARN_PARTITION="${AWS_ARN_PARTITION:-aws}"
+PATH="$PATH:/home/aardvark/.local/bin"
 
 # if the database uri is not set, create sqlite database
 if [[ -z "${AARDVARK_DATABASE_URI}" ]]; then
