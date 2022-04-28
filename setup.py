@@ -31,7 +31,7 @@ install_requires = [
     'Bunch==1.0.1',
     'Flask-SQLAlchemy~=2.5',
     'cloudaux>=1.8.0',
-    'Flask==1.0.2',
+    'Flask==1.1.2',
     'Flask-RESTful==0.3.5',
     'Flask-Script==2.0.5',
     'flasgger==0.6.3',
@@ -40,6 +40,9 @@ install_requires = [
     'pytz==2017.2',
     'swag-client==0.4.6',
     'tqdm==4.40.0',
+    'jinja2<3.1.0',
+    'itsdangerous==2.0.1',
+    'Werkzeug==0.16.0',
     'deepdiff==3.3.0'  # Pinning to last py2 compatible version. Needed for swag-client.
 ]
 

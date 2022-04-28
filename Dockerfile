@@ -13,6 +13,7 @@ WORKDIR /usr/src/aardvark
 COPY . /usr/src/aardvark
 RUN chown -R aardvark:aardvark /usr/src/aardvark
 
+RUN python setup.py develop
 USER aardvark:aardvark
 RUN pip install .
 
