@@ -1,4 +1,4 @@
-FROM python:3.8-alpine3.15
+FROM python:3.9-alpine3.15
 
 RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev build-base
 RUN mkdir -p /usr/src/aardvark \
@@ -11,7 +11,7 @@ RUN mkdir /etc/aardvark && chown -R aardvark:aardvark /etc/aardvark
 WORKDIR /usr/src/aardvark
 
 COPY . /usr/src/aardvark
-RUN chown -R aardvark:aardvark /usr/src/aardvark
+RUN rm -rf test && chown -R aardvark:aardvark /usr/src/aardvark
 
 RUN python setup.py develop
 USER aardvark:aardvark
