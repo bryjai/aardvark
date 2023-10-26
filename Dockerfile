@@ -11,9 +11,10 @@ RUN mkdir /etc/aardvark && chown -R aardvark:aardvark /etc/aardvark
 WORKDIR /usr/src/aardvark
 
 COPY . /usr/src/aardvark
-RUN rm -rf test && chown -R aardvark:aardvark /usr/src/aardvark
 
 RUN python setup.py develop
+RUN rm -rf test && chown -R aardvark:aardvark /usr/src/aardvark
+
 USER aardvark:aardvark
 RUN pip install .
 
